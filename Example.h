@@ -1,18 +1,16 @@
-#ifndef EXAMPLE_H
-#define EXAMPLE_H
+#pragma once
 
 #include <QWidget>
 
-class Example : public QWidget
-{
+class Example : public QWidget {
+
     Q_OBJECT
 
-public:
-    explicit Example(QWidget *parent = 0);
-    ~Example();
+    public:
+        explicit Example(QWidget* parent = 0);
+        ~Example();
 
-private:
+    private:
 
 };
 
-#endif // EXAMPLE_H
