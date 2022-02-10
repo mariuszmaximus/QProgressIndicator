@@ -11,6 +11,5 @@ class Example : public QWidget {
         ~Example();
 
     private:
-
 };
 
