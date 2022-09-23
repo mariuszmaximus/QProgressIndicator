@@ -85,7 +85,7 @@ const QColor& QProgressIndicator::color () {
     return _color;
 }
 
-void QProgressIndicator::setColor (QColor &color) {
+void QProgressIndicator::setColor (const QColor& color) {
 
     _color = color;
 }
@@ -106,6 +106,7 @@ void QProgressIndicator::onTimeout() {
         case line_rotate:
         case ball_rotate:
             _angle = (_angle + 45) % 360;
+            break;
         case circle_rotate:
             _angle = (_angle + 45) % 360;
             break;

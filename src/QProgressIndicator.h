@@ -34,7 +34,7 @@ class QProgressIndicator : public QWidget {
         void                setType             (int type);
 
         const QColor&       color               ();
-        void                setColor            (QColor &color);
+        void                setColor            (const QColor &color);
 
         int                 interval            ();
         void                setInterval         (int interval);
