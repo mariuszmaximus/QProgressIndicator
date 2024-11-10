@@ -3,6 +3,7 @@
 #include <QDebug>
 #include <QPoint>
 #include <QPoint>
+#include <QtCore/qglobal.h>
 #include <QtGlobal>
 
 #define SPIN_INTERVAL 100 // Set timer to wake up every 100ms.
@@ -167,27 +168,39 @@ void QProgressIndicator::drawScaleLine(QPainter *painter) {
 void QProgressIndicator::drawRotateBall(QPainter *painter) {
 
   int width = qMin(this->width(), this->height());
-
-  int outerRadius = (width - 4) * 0.5f;
+    qDebug() << "==========";
+    qDebug() << "this->width() ==" << this->width();
+    qDebug() << "this->height() ==" << this->height();
+    
+  int outerRadius = (width - 25) * 0.5f;
   int innerRadius = outerRadius * 0.78f;
+
 
   int capsuleRadius = (outerRadius - innerRadius) / 2;
 
-  for (int i = 0; i < 8; i++) {
+    qDebug() << "outerRadius ==" << outerRadius;
+    qDebug() << "innerRadius ==" << innerRadius;
+    qDebug() << "capsuleRadius ==" << capsuleRadius;
+
+  int ballCount = 8;  
+
+  for (int i = 0; i < ballCount; i++) {
 
     QColor color = _color;
 
-    color.setAlphaF(1.0f - (i / 8.0f));
+    color.setAlphaF(1.0f - (i / (double)ballCount));
 
     painter->setPen(Qt::NoPen);
     painter->setBrush(color);
 
-    qreal radius = capsuleRadius * (1.0f - (i / 16.0f));
+    qreal radius = capsuleRadius * (1.0f - (i / ((double)ballCount*2)));
+
+    qDebug() << "I="<< i << " radius=" << radius;
 
     painter->save();
 
     painter->translate(rect().center());
-    painter->rotate(_angle - i * 45.0f);
+    painter->rotate(_angle - i * (360.0/ballCount));
 
     QPointF centre = QPointF(-capsuleRadius, -(innerRadius + capsuleRadius));
     painter->drawEllipse(centre, radius * 2, radius * 2);
