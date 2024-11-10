@@ -2,6 +2,7 @@
 
 #include <QDebug>
 #include <QPoint>
+#include <QPoint>
 #include <QtGlobal>
 
 #define SPIN_INTERVAL 100 // Set timer to wake up every 100ms.
@@ -203,7 +204,9 @@ void QProgressIndicator::drawRotateCircle(QPainter *painter) {
   int width = qMin(this->width(), this->height());
   int penwidth = 5;
 
-  QRectF r = QRect(0 + penwidth, 0 + penwidth, width - (2 * penwidth),
+  QRectF r = QRect(0 + penwidth, 
+                    0 + penwidth, 
+                    width - (2 * penwidth),
                    width - (2 * penwidth));
 
   QPen pen(_color);
@@ -212,6 +215,9 @@ void QProgressIndicator::drawRotateCircle(QPainter *painter) {
 
   painter->setPen(pen);
   painter->setBrush(_color);
+
+  // move rect into center 
+  painter->translate( QPoint((this->width()-width)/2, (this->height()-width)/2));
 
   int startAngle = 0.0;
   int spanAngle = 45 * 16;
