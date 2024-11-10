@@ -4,5 +4,5 @@ project(QProgressIndicator VERSION 0.1.0 LANGUAGES C CXX)
 
 add_subdirectory(src)
 
-# add_subdirectory(example)
+add_subdirectory(example)
 
