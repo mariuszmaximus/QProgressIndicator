@@ -16,6 +16,8 @@ QProgressIndicator::QProgressIndicator(QWidget *parent) : QWidget(parent) {
   _scale = 0.0f;
   _color = Qt::black;
 
+  _ballCount = 8;
+
   // setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
   // setFocusPolicy(Qt::NoFocus);
 
@@ -78,6 +80,11 @@ void QProgressIndicator::setColor(const QColor &color) { _color = color; }
 int QProgressIndicator::interval() { return _interval; }
 
 void QProgressIndicator::setInterval(int interval) { _interval = interval; }
+
+int QProgressIndicator::ballCount() { return _ballCount; }
+
+void QProgressIndicator::setBallCount(int ballCount) { _ballCount = ballCount; }
+
 
 void QProgressIndicator::onTimeout() {
 
@@ -168,42 +175,31 @@ void QProgressIndicator::drawScaleLine(QPainter *painter) {
 void QProgressIndicator::drawRotateBall(QPainter *painter) {
 
   int width = qMin(this->width(), this->height());
-    qDebug() << "==========";
-    qDebug() << "this->width() ==" << this->width();
-    qDebug() << "this->height() ==" << this->height();
-    
-  int outerRadius = (width - 25) * 0.5f;
-  int innerRadius = outerRadius * 0.78f;
+  double capsuleRadius = width/2.0 * 50.0/100.0 / 2.0;
+  double outerRadius = width/2.0;
+  double innerRadius = width/2.0 - capsuleRadius*2;
 
-
-  int capsuleRadius = (outerRadius - innerRadius) / 2;
-
-    qDebug() << "outerRadius ==" << outerRadius;
-    qDebug() << "innerRadius ==" << innerRadius;
-    qDebug() << "capsuleRadius ==" << capsuleRadius;
-
-  int ballCount = 8;  
-
-  for (int i = 0; i < ballCount; i++) {
+  for (int i = 0; i < _ballCount; i++) {
 
     QColor color = _color;
 
-    color.setAlphaF(1.0f - (i / (double)ballCount));
+    color.setAlphaF(1.0f - (i / (double)_ballCount));
 
     painter->setPen(Qt::NoPen);
     painter->setBrush(color);
 
-    qreal radius = capsuleRadius * (1.0f - (i / ((double)ballCount*2)));
-
-    qDebug() << "I="<< i << " radius=" << radius;
+    // radius in range 100%..50% 
+    qreal radius = capsuleRadius * (1.0f - (i / (((double)_ballCount-1)*2)));
 
     painter->save();
 
     painter->translate(rect().center());
-    painter->rotate(_angle - i * (360.0/ballCount));
+    painter->rotate(_angle - i * (360.0/(_ballCount)));
 
-    QPointF centre = QPointF(-capsuleRadius, -(innerRadius + capsuleRadius));
-    painter->drawEllipse(centre, radius * 2, radius * 2);
+    // orginal wrong version 
+    // QPointF centre = QPointF(-capsuleRadius, -(innerRadius + capsuleRadius));
+    QPointF centre = QPointF(0, -(innerRadius + capsuleRadius));
+    painter->drawEllipse(centre, radius , radius );
 
     painter->restore();
   }

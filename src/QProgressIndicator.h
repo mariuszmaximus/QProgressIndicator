@@ -14,6 +14,9 @@ class QProgressIndicator : public QWidget {
   Q_PROPERTY(QColor _color READ color WRITE setColor)
   Q_PROPERTY(int _interval READ interval WRITE setInterval)
 
+  // only for drawRotateBall  
+  // Q_PROPERTY(int _ballCount READ ballCount WRITE setBallCount)
+
 public:
   QProgressIndicator(QWidget *parent = 0);
   ~QProgressIndicator();
@@ -34,6 +37,12 @@ public:
   int interval();
   void setInterval(int interval);
 
+  // only for drawRotateBall  
+  int ballCount();
+  // only for drawRotateBall  
+  void setBallCount(int interval);
+
+
 private slots:
   void onTimeout();
 
@@ -46,6 +55,8 @@ private:
 private:
   int _type;
   int _interval;
+  // only for drawRotateBall  
+  int _ballCount;
   QColor _color;
 
   int _angle;
