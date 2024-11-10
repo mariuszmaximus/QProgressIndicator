@@ -10,7 +10,7 @@ Comes with a test program (main.cpp, Example.h, Example.cpp)
 ScreenShot
 ==========
 
-![](images/screenshot.gif)
+![](images/screenshot.png)
 
 Building QProgressIndicator
 ===========================
