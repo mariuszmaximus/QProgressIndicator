@@ -12,9 +12,9 @@ set(CMAKE_AUTOUIC ON)
 set(CMAKE_AUTORCC ON)
 
 
-add_library(QProgressIndicator 
+add_library(ProgressIndicator 
     QProgressIndicator.cpp
     QProgressIndicator.h
 )
 
-target_link_directories(QProgressIndicator PUBLIC Qt${QT_VERSION_MAJOR}::Widgets)
+target_link_directories(ProgressIndicator PUBLIC Qt${QT_VERSION_MAJOR}::Widgets)
