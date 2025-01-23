@@ -1,8 +1,16 @@
-cmake_minimum_required(VERSION 3.5.0)
+cmake_minimum_required(VERSION 3.15.0)
+
+set(QPROGRESSINDICATOR_MASTER_PROJECT OFF)
+if(CMAKE_CURRENT_SOURCE_DIR STREQUAL CMAKE_SOURCE_DIR)
+    set(QPROGRESSINDICATOR_MASTER_PROJECT ON)
+endif()
+
 
 project(QProgressIndicator VERSION 0.1.0 LANGUAGES C CXX)
 
 add_subdirectory(src)
 
-add_subdirectory(example)
+if(QPROGRESSINDICATOR_MASTER_PROJECT)
+    add_subdirectory(example)
+endif()
 
